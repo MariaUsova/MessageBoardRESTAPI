@@ -41,7 +41,8 @@ namespace Storytel.Services
         public async Task<IEnumerable<User>> GetAll()
         {
             // return users without passwords
-            return await Task.Run(() => _users.Select(x => {
+            return await Task.Run(() => _users.Select(x =>
+            {
                 x.Password = null;
                 return x;
             }));

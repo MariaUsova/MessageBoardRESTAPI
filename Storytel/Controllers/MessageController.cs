@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Storytel.Services;
+using System;
 
 namespace Storytel.Controllers
 {
@@ -18,6 +14,7 @@ namespace Storytel.Controllers
         private IUserService _userService;
         private IMessagesService _messagesService;
         private IHttpContextAccessor _httpContextAccessor;
+
 
         public MessageController(IUserService userService, IMessagesService messagesService, IHttpContextAccessor httpContextAccessor)
         {
@@ -55,13 +52,13 @@ namespace Storytel.Controllers
         public IActionResult UpdateMessage(Guid id, UpdateMessageModel model)
         {
             var userId = _userService.GetCurrentUserId(this._httpContextAccessor);
-            
+
             var message = _messagesService.GetById(id);
             if (message == null)
             {
                 return NotFound();
             }
-           
+
             if (message.UserId != userId)
             {
                 return Forbid();
@@ -77,7 +74,7 @@ namespace Storytel.Controllers
         public IActionResult DeleteMessage(Guid id)
         {
             var userId = _userService.GetCurrentUserId(this._httpContextAccessor);
-            
+
             var message = _messagesService.GetById(id);
             if (message == null)
             {

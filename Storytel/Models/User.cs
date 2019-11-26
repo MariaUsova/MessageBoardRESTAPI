@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Storytel.Models
+﻿namespace Storytel.Models
 {
     public class User
     {

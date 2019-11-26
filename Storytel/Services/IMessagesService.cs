@@ -43,6 +43,12 @@ namespace Storytel.Services
             return message;
         }
 
+        public Message Add(Message message)
+        {
+            _messages.Add(message);
+            return message;
+        }
+
         public bool Delete(Message message)
         {
             return _messages.Remove(message);
