@@ -4,6 +4,9 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>32edb0b1-191b-4af1-b62a-6ed5062e6766</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <StartupObject>Storytel.Program</StartupObject>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
