@@ -1,0 +1,21 @@
+# Depending on the operating system of the host machines(s) that will build or run the containers, the image specified in the FROM statement may need to be changed.
+# For more information, please see https://aka.ms/containercompat
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-nanoserver-1803 AS build
+WORKDIR /app
+
+# Copy csproj and restore as distinct layers
+COPY *.sln .
+COPY Storytel/*.csproj ./Storytel/
+COPY StorytelTests/*.csproj ./StorytelTests/
+RUN dotnet restore
+
+# Copy everything else and build app
+COPY Storytel/. ./Storytel/
+WORKDIR /app/Storytel
+RUN dotnet publish -c Release -o out
+
+# Build container
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-nanoserver-1803 AS runtime
+WORKDIR /app
+COPY --from=build /app/Storytel/out ./
+ENTRYPOINT ["dotnet", "Storytel.dll"]
