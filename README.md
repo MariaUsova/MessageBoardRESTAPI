@@ -12,7 +12,7 @@ Supports Basic Auth mechanism. List of available users:
 ```
 new User { Id = 1, Username = "test", Password = "test" },
 new User { Id = 2, Username = "user", Password = "password" },
-new User { Id = 2, Username = "admin", Password = "admin" }
+new User { Id = 3, Username = "admin", Password = "admin" }
 ```            
 
 ## Used technologies
