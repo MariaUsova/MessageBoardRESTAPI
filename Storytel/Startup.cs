@@ -12,6 +12,9 @@ namespace Storytel
 {
     public class Startup
     {
+        readonly string CorsPolicy = "CorsPolicy";
+
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,6 +25,16 @@ namespace Storytel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicy, builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+            });
+
             services.AddControllers();
             services.AddRouting(options => options.LowercaseUrls = true);
 
@@ -49,7 +62,7 @@ namespace Storytel
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors(CorsPolicy);
 
             app.UseAuthorization();
 
